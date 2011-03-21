@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"> 
+<head> 
+<title>RECREO管理</title> 
+<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+<link href="../css/main.css" rel="stylesheet" type="text/css" />
+<link href="../js/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/facebox/facebox.js"></script>
+<script type="text/javascript"> 
+  jQuery(document).ready(function($) {
+    $('a[rel*=facebox]').facebox({
+      loading_image : '../js/facebox/loading.gif',
+      close_image   : '../js/facebox/closelabel.gif'
+    }) 
+  })
+  </script>
+</head>
+<body> 
+<div id="container"> 
+<div id="header"><h1>RECREO管理</h1><a href="/admin/article">記事管理</a></div> 
+<div id="wrapper"> 
+<div id="content">
+<h2>写真の管理</h2>
+<form action="/admin/photo" enctype="multipart/form-data" method="post" style="padding:30px 0px;">
+写真：<br /><input type="file" name="photo">
+<div>コメント：<br /><textarea name="comment" rows="3" cols="60"></textarea></div>
+タグ：<br /><input type="text" name="tag" value="" />
+<input type="hidden" name="akey" value="{{articlekey}}" />
+<br />
+<input type="submit" value="アップロード">
+</form>
+<table class="tablesorter" style="width:100%">
+  <thead>
+    <tr><th>画像</th><th>ファイル名</th><th>サイズ(KB)</th><th>コメント</th><th>削除</th></tr>
+  </thead>
+  <tbody>
+{% for pic in pics %}
+    <tr>
+      <td><img src="/img/{{pic.key}}" width="100" /></td>
+      <td>{{pic.filename}}</td>
+      <td>{{pic.getSize}}</td>
+      <td>{{pic.Comment}}</td>
+      <td><a href="/admin/photo/edit?akey={{articlekey}}&key={{pic.key}}" rel="facebox">編集</a>&nbsp;&nbsp;<a href="/delete?akey={{articlekey}}&key={{pic.key}}">削除</a></td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+</div><!-- end content -->
+</div><!-- end wrapper -->
+<div id="footer"><p></p></div> 
+</div> 
+</body> 
+</html>

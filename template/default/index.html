@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"> 
+<head> 
+<link rel="shortcut icon" href="./image/favicon.ico" type="image/x-icon"/>
+<link rel="icon" href="./image/favicon.ico" type="image/x-icon"/>
+<title>RECREO{{title}}</title> 
+<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+<meta name="google-site-verification" content="IJfkcTajZZh1Ihi74KjeOiecRWiaMSMr-2rs5uNM11c" />
+<link href="./css/main.css?20101211" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+</head> 
+<body> 
+<div id="container"> 
+<div id="header">
+  <h1><a href="/"><img src="./image/logo2.png" /></a></h1>
+  <p style="float:right;">
+    <span class="rss">Archive
+    </span><br /><br />
+    {% for tag in datetags %}
+      <a href="/?datetag={{tag.name}}" class="rss" style="margin-left:20px;">{{tag.Name}}</a><br />
+    {% endfor %}  
+    <br /><br />
+    <span class="rss">Photo Book
+    </span><br /><br />
+    {% for book in books %}
+      <a href="/book?akey={{book.key}}" class="rss" style="margin-left:20px;">{{book.title}}</a><br />
+    {% endfor %}
+    <br /><br />  
+    <a class="rss" href="./rss" target="blank" title="RSSフィード"><img src="./image/feed-icon-10x10.png" />&nbsp;RSS</a><br /><br />
+    <a class="rss" href="http://www.bloglines.com/sub/http://recreoplus.appspot.com/rss" target="blank" title="bloglinesで購読"><img src="./image/feed-icon-10x10.png" />&nbsp;bloglines</a><br /><br />
+    <a class="rss" href="http://r.hatena.ne.jp/append/http://recreoplus.appspot.com/rss" target="blank" title="はてなで購読"><img src="./image/feed-icon-10x10.png" />&nbsp;Hatena</a><br /><br />
+    <a class="rss" href="http://reader.livedoor.com/subscribe/http://recreoplus.appspot.com/rss" target="blank" title="ライブドアで購読"><img src="./image/feed-icon-10x10.png" />&nbsp;livedoor</a><br /><br />
+    <a class="rss" href="http://twib.jp/share?url=http://recreoplus.appspot.com/" style="border:none;" title="コメントをつぶやこっと！"
+       target="_blank" rel="nofollow">
+      <img src="http://twib.jp/static/images/t.gif" alt="このエントリをつぶやく" style="padding:0px;" />&nbsp;Tweet
+    </a>    
+  </p>
+</div> 
+<div id="wrapper"> 
+{% for article in articles %}
+  <div id="border"></div>
+  <div id="{{article.key}}" class="content">
+  <h2><a href="article?akey={{article.key}}">{{article.CreateDate}}&nbsp;&nbsp;{{article.title}}</a>
+    <a href="http://twib.jp/share?url=http://recreoplus.appspot.com/article?akey={{article.key}}" style="border:none;text-decoration: none;position:relative;top:4px;" title="コメントをつぶやこっと！"
+       target="_blank" rel="nofollow">
+      <img src="http://twib.jp/static/images/t.gif" alt="このエントリをつぶやく" style="padding:0px;" />
+    </a>
+  </h2>
+  {% for photo in article.photo_set %}
+    <img src="/img/{{photo.key}}" />
+    <p>{{photo.Comment}}</p>
+  {% endfor %}  
+</div><!-- end content -->
+{% endfor %}  
+{% for photo in photos %}
+  <div id="border"></div>
+  <div id="content">
+    <img src="/img/{{photo.key}}" />
+    <p>{{photo.Comment}}</p>
+  </div><!-- end content -->
+{% endfor %}  
+</div><!-- end wrapper -->
+<div id="navigation"> 
+<p><strong>Tag：</strong>
+<br /> 
+<a href="/">最新</a>
+<br />
+{% for tag in keywordtags %}
+<a href="/?keywordtag={{tag.name}}">{{tag.Name}}</a>
+{% endfor %}  
+</p> 
+</p> 
+</div> 
+<div id="extra"> 
+<p>
+<strong>About：</strong>
+<br />このサイトは写真をメインとした我が家の日々の思い出です。
+<br /><strong>Camera：</strong>
+<br />Ricoh GR Degital　と　Orympus E410
+<br /><strong>Contact：</strong>
+<br />recreo.contact@gmail.com
+</p>
+</div> 
+<div id="footer"><p></p></div> 
+</div> 
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-16034475-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body> 
+</html>

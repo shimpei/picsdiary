@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"> 
+<head> 
+<title>RECREO管理</title> 
+<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+<link href="../css/main.css" rel="stylesheet" type="text/css" />
+<link href="../js/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/facebox/facebox.js"></script>
+<script type="text/javascript"> 
+  jQuery(document).ready(function($) {
+    $('a[rel*=facebox]').facebox({
+      loading_image : '../js/facebox/loading.gif',
+      close_image   : '../js/facebox/closelabel.gif'
+    }) 
+  })
+</script>
+</head> 
+<body> 
+<div id="container"> 
+<div id="header"><h1>RECREO管理</h1><a href="/">プレビュー</a></div> 
+<div id="wrapper"> 
+<div id="content">
+<h2>記事の管理</h2>
+<form action="/admin/article" method="post" style="padding:30px 0px;">
+日付：<br /><input type="text" name="createdate" value="" /><br />
+タイトル：<br /><input type="text" name="title" value="" /><br />
+タイプ：<br /><select name="articletype"><option value="1">diary</option><option value="2">book</option></select><br />
+テキスト（For Book）：<br /><textarea name="comment" rows="3" cols="60"></textarea><br />
+<input type="submit" value="作成" />
+</form>
+
+<table class="tablesorter" style="width:100%">
+  <thead>
+    <tr><th>作成日</th><th>タイトル</th><th>タイプ</th><th>コメント</th><th>編集・削除</th>
+  </thead>
+  <tbody>
+{% for item in articles %}
+    <tr>
+      <td>{{item.createdate}}</td>
+      <td>{{item.title}}</td>
+      <td>{{item.Articletype}}</td>
+      <td>{{item.Comment}}</td>
+      <td><a href="/admin/article/edit?akey={{item.key}}" rel="facebox">編集</a>&nbsp;&nbsp;<a href="/admin/article/delete?key={{item.key}}">削除</a>&nbsp;&nbsp;<a href="/admin/photo?akey={{item.key}}">写真管理</a></td>
+    </tr>
+{% endfor %}  
+  </tbody>
+</table>
+
+</div><!-- end content -->
+</div><!-- end wrapper -->
+<div id="footer"><p></p></div> 
+</div> 
+</body> 
+</html>

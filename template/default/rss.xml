@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>RECREO</title>
+    <description>写真でつづる休日の記録</description>
+    <link>http://recreoplus.appspot.com/</link>
+    <laguage>ja</laguage>
+    {% for article in articles %}
+      <item>
+        <title>{{article.CreateDate}}-{{article.title}}</title>
+        <link>http://recreoplus.appspot.com/#{{article.key}}</link>
+        <description>
+          <![CDATA[
+            {% for photo in article.photo_set %}
+              <img src="http://recreoplus.appspot.com/img/{{photo.key}}" />
+              <p>{{photo.Comment}}</p>
+            {% endfor %}
+          ]]>  
+        </description>
+        <pubdate>{{article.CreateDate}}</pubdate>
+      </item>
+   {% endfor %}    
+  </channel>
+</rss>
